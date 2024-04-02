@@ -27,7 +27,7 @@ const Categories = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const data = await request('/blog/getAll', 'GET')
+        const data = await request('/api/blog/getAll', 'GET')
         setBlogs(data)
         setFilteredBlogs(data)
       } catch (error) {

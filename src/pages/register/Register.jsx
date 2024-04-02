@@ -21,7 +21,7 @@ const Register = () => {
     try {
       const options = {'Content-Type': 'application/json'}
 
-      const data = await request('/auth/register', "POST", options, {username, email, password})
+      const data = await request('/api/auth/register', "POST", options, {username, email, password})
       dispatch(register(data))
       navigate("/")
     } catch (error) {

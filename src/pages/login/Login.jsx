@@ -23,7 +23,7 @@ const Login = () => {
       } 
 
 
-      const data = await request("/auth/login", 'POST', options, {email, password})
+      const data = await request("/api/auth/login", 'POST', options, {email, password})
        console.log(data)
       dispatch(login(data))
       navigate('/')
