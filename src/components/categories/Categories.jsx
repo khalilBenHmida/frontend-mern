@@ -10,6 +10,8 @@ import { AiFillLike } from 'react-icons/ai'
 import { FiArrowRight } from 'react-icons/fi'
 
 const Categories = () => {
+  const BASE_URL = "https://backend-mern-uep0.onrender.com"
+  // const BASE_URL = "http://localhost:5000"
   const [blogs, setBlogs] = useState([])
   const [filteredBlogs, setFilteredBlogs] = useState([])
   const [activeCategory, setActiveCategory] = useState('all')
@@ -71,7 +73,7 @@ const Categories = () => {
               {filteredBlogs?.map((blog) => (
                 <div key={blog._id} className={classes.blog}>
                   <Link to={`/blogDetails/${blog?._id}`}>
-                    <img src={`http://localhost:5000/images/${blog?.photo}`} />
+                    <img src={`${BASE_URL}/api/images/${blog?.photo}`} />
                   </Link>
                   <div className={classes.blogData}>
                     <div className={classes.categoryAndMetadata}>

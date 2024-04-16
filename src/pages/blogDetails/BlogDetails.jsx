@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import classes from './blogDetails.module.css'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { request } from '../../utils/fetchApi'
@@ -11,10 +11,14 @@ import { format } from 'timeago.js'
 import { AiFillEdit, AiFillLike, AiFillDelete, AiOutlineArrowRight, AiOutlineLike } from 'react-icons/ai'
 
 const BlogDetails = () => {
+  const BASE_URL = "https://backend-mern-uep0.onrender.com"
+  // const BASE_URL = "http://localhost:5000"
   const [blogDetails, setBlogDetails] = useState("")
   const [isLiked, setIsLiked] = useState(false)
   const { id } = useParams()
   const { user, token } = useSelector((state) => state.auth)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchBlogDetails = async () => {
@@ -22,6 +26,7 @@ const BlogDetails = () => {
         const options = { 'Authorization': `Bearer ${token}` }
         const data = await request(`/api/blog/find/${id}`, 'GET', options)
         setBlogDetails(data)
+        console.log(data);
         setIsLiked(data.likes.includes(user._id))
       } catch (error) {
         console.error(error)
@@ -46,6 +51,7 @@ const BlogDetails = () => {
     try {
       const options = {"Authorization": `Bearer ${token}`}
       await request(`/api/blog/deleteBlog/${id}`, "DELETE", options)
+      navigate("/")
     } catch (error) {
       console.error(error)
     }
@@ -60,7 +66,7 @@ const BlogDetails = () => {
           Go Back <AiOutlineArrowRight />
         </Link>
         <div className={classes.wrapper}>
-          <img src={`http://localhost:5000/images/${blogDetails?.photo}`} />
+          <img src={`${BASE_URL}/api/images/${blogDetails?.photo}`} />
           <div className={classes.titleAndControls}>
             <h3 className={classes.title}>{blogDetails?.title}</h3>
             {blogDetails?.userId?._id === user._id ?
@@ -68,8 +74,8 @@ const BlogDetails = () => {
                 <Link to={`/updateBlog/${blogDetails?._id}`} className={classes.edit}>
                   <AiFillEdit />
                 </Link>
-                <div className={classes.delete}>
-                  <AiFillDelete onClick={handleDeleteBlog}/>
+                <div className={classes.delete} onClick={handleDeleteBlog}>
+                  <AiFillDelete/>
                 </div>
               </div>
               :

@@ -9,6 +9,8 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { request } from '../../utils/fetchApi'
 
 const Create = () => {
+  const BASE_URL = "https://backend-mern-uep0.onrender.com"
+  // const BASE_URL = "http://localhost:5000"
   const [title, setTitle] = useState("")
   const [desc, setDesc] = useState("")
   const [img, setImg] = useState("")
@@ -46,7 +48,7 @@ const Create = () => {
         formData.append("filename", filename)
         formData.append("image", img)
 
-        await fetch(`http://localhost:5000/upload`, {
+        await fetch(`${BASE_URL}/upload`, {
           method: "POST",
           body: formData
         })

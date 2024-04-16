@@ -32,7 +32,7 @@ const UpdateBlog = () => {
     const fetchBlogDetails = async () => {
       try {
         const options = {'Authorization': `Bearer ${token}`}
-        const data = await request(`/blog/find/${id}`, 'GET', options)
+        const data = await request(`/api/blog/find/${id}`, 'GET', options)
         setBlogDetails(data)
         setTitle(data.title)
         setDesc(data.desc)

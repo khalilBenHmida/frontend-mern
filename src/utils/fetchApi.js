@@ -1,4 +1,5 @@
-const BASE_URL = "https://backend-mern-uep0.onrender.com"
+// const BASE_URL = "https://backend-mern-uep0.onrender.com"
+const BASE_URL = "http://localhost:5000"
 
 export const request = async (url, method, headers = {}, body = {}, isNotStringified = false) => {
     let res
